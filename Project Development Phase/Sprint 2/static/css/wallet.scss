@@ -1,0 +1,456 @@
+// Imports & Includes
+@import 'bourbon';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,400|Roboto);
+
+// Colors
+$yellow: #ffcc66;
+$purple: #8393ca;
+$green: #66cc33;
+$shadow: #ffa61b; 
+$gray-light: #f2f2f2;
+$gray-dark: #707584;
+$gray: #b2b2b2; 
+$black: #444751;
+
+// Fonts
+$font-primary: 'Open Sans', sans-serif;
+$font-secondary: 'Roboto', sans-serif;
+
+// Mixins
+@mixin letter-spacing($tracking) {
+	letter-spacing: $tracking / 1000 + em;
+}
+
+// CSS
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}// *, *:before, *:after
+
+body {
+	background-color: $yellow;
+	color: #444751;
+}// body
+
+.my-wallet {
+	@include transform( translate3d(-50%,-50%,0) );
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 6px 20px $shadow;
+	font-family: $font-primary;
+	height: 700px;
+	left: 50%;
+	overflow: hidden;
+	position: absolute;
+	top: 50%;
+	width: 880px;
+	
+	&-sidebar {
+		background-color: $gray-light;
+		color: $gray-dark;
+		float: left;
+		height: 100%;
+		padding: 50px;
+		width: 360px;
+	}// .my-wallet-sidebar
+	
+	&-title {
+		font-size: 24px;
+		font-weight: normal;
+		margin: 0 0 50px 0;
+		
+		.add-account {
+			@include transition( color 200ms );
+			color: $gray;
+			float: right;
+			font-size: 48px;
+			line-height: 20px;
+			position: relative;
+			
+			&:hover {
+				color: $gray-dark;
+				cursor: pointer;
+			}
+		}// .add-account
+	}// .my-wallet-title
+}// .my-wallet
+
+.loading {
+	@include animation(load 500ms ease forwards);
+	@include animation-delay(2s);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #fff url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/ripple.svg') center no-repeat;
+	z-index: 999;
+}
+
+.accounts-container {
+	bottom: 50px;
+	left: 50px;
+	height: 330px;
+	position: absolute;
+}// .accounts-container
+
+.active-account {
+	border: 4px solid $purple;
+	border-radius: 4px;
+	height: 150px;
+	position: relative;
+	width: 250px;
+	z-index: 1;
+}
+
+.account {
+	background-color: #fff;
+	border: 2px solid #e1e1e1;
+	border-radius: 4px;
+	font-family: $font-secondary;
+	height: 150px;
+	margin-bottom: 30px;
+	padding: 15px;
+	width: 250px;
+	
+	&-card-type {
+		height: 44px;
+		margin-bottom: 20px;
+		width: 64px;
+		
+		&.is-visa {
+			background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/visa-card.svg') center no-repeat;
+		}// .account-card-type--visa
+		
+		&.is-amex {
+			background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/amex-card.svg') center no-repeat;
+		}// .account-card-type--amex
+		
+		&.is-mastercard {
+			background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/mastercard.svg') center no-repeat;
+		}// .account-card-type--mastercard
+		
+	}// .account-card-type
+	
+	&-number {
+		@include letter-spacing(90);
+		border: none;
+		font-family: $font-secondary;
+		font-size: 20px;
+		outline: none;
+	}// .account-number
+	
+	&-expiration {
+		border: none;
+		bottom: 15px;
+		color: $gray;
+		font-size: 16px;
+		left: 15px;
+		outline: none;
+		position: absolute;
+	}// .account-expiration
+}
+
+.my-wallet-sidebar .account {
+	@extend .account;
+	@include transition( top 500ms ease, transform 200ms ease );	
+	position: absolute;
+	top: 0;
+	will-change: transform, top;
+	
+	&.is-selected {
+		top: -186px !important;
+	}
+	
+	&:hover:not(.is-selected) {
+		@include transform( translateY(-30px) );
+		cursor: pointer;
+		
+		&.is-stationary {
+			@include transform( translateY(0) );
+		}//.account.is-stationary:hover:not(.is-selected)
+		
+	}// .account:hover:not(.is-selected)
+	
+}// .account
+
+.account-details-container {
+	font-family: $font-primary;
+	height: 100%;
+	overflow: hidden;
+	padding: 50px;
+	position: relative;
+}// .account-details-container
+
+.account-details {
+	@include transition( transform 500ms ease, opacity 200ms ease );
+	@include transform( translateX(110%) );
+	opacity: 0;
+	position: absolute;
+	top: 50px;
+	width: 420px;
+	
+	&.is-selected {
+		@include transition( transform 500ms ease, opacity 200ms 200ms ease );
+		@include transform( translateX(0) );
+		opacity: 1;
+	}
+}
+
+.transaction-history-placeholder {
+	@include transform( translate3d(-50%,-50%,0) );
+	@include transition( opacity 200ms ease );
+	color: $gray;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: normal;
+	left: 50%;
+	opacity: 1;
+	position: absolute;
+	top: 50%;
+	
+	&.is-hidden {
+		opacity: 0;
+	}
+}// .transaction-history-placeholder
+
+.value-unit {
+	color: #444751;
+	font-size: 36px;
+	font-weight: bold;
+	position: relative;
+}// ..value-unit
+
+.value-subunit {
+	font-size: 0.6em;
+	left: -0.5em;
+	position: relative;
+	top: 0.1em;		
+}// .value-subunit
+
+.account-balance {
+	@include letter-spacing(25);
+	border-bottom: 1px solid $gray;
+	color: $gray-dark;
+	font-size: 24px;
+	padding-bottom: 60px;
+	
+	.value-unit {
+		float: right;
+		right: -0.25em;
+		top: -0.2em;
+	}// .value-unit
+}// .account-balance
+
+.transaction-history {
+	height: 510px;
+	overflow: hidden;
+	overflow-y: scroll;
+	padding-right: 30px;
+	width: 450px;
+}// .transaction-history;
+
+.transaction {
+	display: table;
+	padding: 50px 0 0 38px;
+	position: relative;
+	width: 100%;
+	
+	&-details {
+		display: table-cell;
+		width: 80%;
+	}// .transaction-details
+	
+	&-amount {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: right;
+		
+		.value-unit {
+			font-size: 18px;
+			font-weight: normal;
+		}// .value-unit
+		
+	}// .transaction-amount
+	
+	&-merchant {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 5px;
+	}// .transaction-merchant
+	
+	&-date {
+		color: $gray;
+		font-size: 14px;
+	}// .transaction-date
+	
+	&:before {
+		border-radius: 100%;
+		border: 2px solid #e1e1e1;
+		content: ' ';
+		display: block;
+		font-size: 14px;
+		font-weight: bold;
+		left: 0;
+		line-height: 16px;
+		height: 20px;
+		position: absolute;
+		text-align: center;
+		top: 65px;
+		width: 20px;
+	}
+	
+	&[data-transaction-type="debit"] {
+		
+		&:before {
+			content: '\2013';
+			line-height: 14px;
+		}
+		
+		.value-unit {
+			color: $purple;
+		}// .value-unit
+		
+	}// .transaction[data-transaction-type="debit"]
+	
+	&[data-transaction-type="credit"] {
+		
+		&:before {
+			content: '\002B';
+		}
+		
+		.value-unit {
+			color: $green;
+		}// .value-unit
+		
+	}// .transaction[data-transaction-type="deposit"]
+}// .transaction
+
+.add-account-modal {
+	visibility: hidden;
+	
+	.overlay {
+		@include transition( opacity 200ms ease );
+		background: $yellow;
+		height: 100%;
+		opacity: 0;
+		position: absolute;
+		width: 100%;
+		z-index: 9000;
+	}// .overlay
+	
+	.account {
+		@extend .account;
+		@include transform( translate3d(-50%,-30%,0) );
+		@include transition( all 300ms ease );
+		border-color: $shadow;
+		left: 50%;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		will-change: transform, opacity;
+		z-index: 9001;
+		
+		&-card-type {
+			border-radius: 5px;
+			float: left;
+			margin-left: 12px;
+			
+			&.is-visa {
+				margin-left: 0;
+			}
+			
+			&:hover {
+				border: 3px solid $yellow;
+				cursor: pointer;
+			}
+			
+			&.is-selected {
+				border: 3px solid $yellow;
+			}
+		}// .account-card-type
+		
+		&-number {
+			@include letter-spacing(30);
+		}// .account-number 
+		
+		&-expiration {
+			color: $black;
+		}// .account-expiration
+		
+		&.has-error {
+			@include animation(error 300ms ease forwards);
+		}
+	}// .account
+	
+	button {
+		background-color: $shadow;
+		border-radius: 4px;
+		border: 4px;
+		color: #fff;
+		float: right;
+		font-size: 14px;
+		padding: 5px 10px;
+		position: relative;
+		top: 60px;
+		right: -20px;
+		
+		&:hover {
+			background-color: darken( $yellow, 15% );
+			cursor: pointer;
+		}
+		
+		&:focus {
+			outline: none;
+		}
+	}// button
+	
+	&.is-visible {
+		visibility: visible;
+		
+		.account {
+			@include transform( translate3d(-50%,-50%,0) );
+			opacity: 1;
+		}// .account
+		
+		.overlay {
+			opacity: 0.8;
+		}// .overlay
+	}// .is-visible
+	
+}// .add-account-modal
+
+.temp-account {
+	color: $gray;
+	font-size: 24px;
+	font-style: italic;
+	padding: 50px 0;
+	text-align: center;
+}
+
+@include keyframes(load) {
+	from {
+		visibility: visible;
+		opacity: 1;
+	}
+	to {
+		visibility: hidden;
+		opacity: 0;
+	}
+}// keyframes
+
+@include keyframes(error) {
+	0% {
+		margin-left: 0;
+	}
+	
+	33% {
+		margin-left: 30px; 
+	}
+	
+	66% {
+		margin-left: -30px;
+	}
+	
+	100% {
+		margin-left: 0;
+	}
+}
