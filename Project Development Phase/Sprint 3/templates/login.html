@@ -1,0 +1,73 @@
+<html lang="en">
+    <head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+        <!--<script src="../static/javascript/index.js"></script>
+    <script src="../static/javascript/validateForm.js"></script>
+    <script>
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if(xhttp.readyState = 4 && xhttp.status == 200)
+          xhttp.responseText;
+      };
+      xhttp.open("GET", "php/db_connection.php?action=is_logged_in", false);
+      xhttp.send();
+
+      //alert(xhttp.responseText);
+      if(xhttp.responseText == "")
+        window.location.href = "http://localhost/Project-IBM/home.html";
+      if(xhttp.responseText == "true")
+        window.location.href = "http://localhost/Project-IBM/home.html";
+
+    </script>-->
+		<title>Expense Tracker</title>
+	</head>
+	<body>
+        
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8 login-box">
+                <div class="col-lg-12 login-key">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                </div>
+                <div class="col-lg-12 login-title">
+                    Welcome Champ !
+                </div>
+
+                <div class="col-lg-12 login-form">
+                    <div class="col-lg-12 login-form">
+                        <form action="home.html" method="post" onsubmit="return validateCredentials();">
+                            <div class="form-group">
+                                <label class="form-control-label">USERNAME</label>
+                                <input type="text" class="form-control" onkeyup="validate();" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">PASSWORD</label>
+                                <input type="password" class="form-control" onkeyup="validate();"required>
+                            </div>
+
+                            <div class="col-lg-12 loginbttm">
+                                <div class="col-lg-6 login-btm login-text">
+                                    <!-- Error Message -->
+                                </div>
+                                <div class="col-lg-6 login-btm login-button">
+                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+                                </div>
+                            </div>
+                            <p >Don't have account <a href="registration.html">Register </a></p>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2"></div>
+            </div>
+        </div>
+
+
+
+
