@@ -16,6 +16,7 @@ a {
 	min-height: 100vh;
 	width: 100%;
 	display: flex;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 }
@@ -297,6 +298,10 @@ p {
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
+	
+}
+#services .service-item:hover{
+	box-shadow: 5px 10px 18px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #services .service-item::after {
 	content: '';
